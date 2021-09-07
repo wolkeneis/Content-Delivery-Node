@@ -1,0 +1,19 @@
+{
+  "name": "content-delivery-node",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wolkeneis/Content-Delivery-Node.git"
+  },
+  "author": "wolkeneis",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/wolkeneis/Content-Delivery-Node/issues"
+  },
+  "homepage": "https://github.com/wolkeneis/Content-Delivery-Node#readme"
+}
