@@ -1,9 +1,11 @@
 'use strict';
 
+const profile = require('./profile');
 const authenticate = require('./authenticate');
-//const api = require('./api');
+const content = require('./content');
 
 module.exports = {
-  authenticate//,
-  //api
+  profile,
+  authenticate,
+  content
 };

@@ -3,12 +3,16 @@
 const passport = require('passport'),
   WolkeneisStrategy = require('passport-wolkeneis').Strategy;
 
-passport.serializeUser((user, callback) => {
-  callback(undefined, user);
+const { database } = require('../content');
+
+passport.serializeUser((user, done) => {
+  done(null, user.id);
 });
-passport.deserializeUser((obj, callback) => {
-  callback(undefined, obj);
+
+passport.deserializeUser((userId, done) => {
+  done(null, database.fetchProfile(userId));
 });
+
 
 passport.use(new WolkeneisStrategy({
   authorizationURL: process.env.AUTH_URL,
@@ -17,6 +21,7 @@ passport.use(new WolkeneisStrategy({
   clientSecret: process.env.CLIENT_SECRET,
   callbackURL: process.env.CALLBACK_URL,
   userProfileURL: process.env.PROFILE_URL
-}, (accessToken, refreshToken, profile, callback) => {
-  callback(undefined, profile);
+}, (accessToken, refreshToken, profile, done) => {
+  database.patchProfile(profile);
+  done(null, profile);
 }));

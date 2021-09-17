@@ -1,51 +1,23 @@
-'use strict';
+"use strict";
 
-require('dotenv').config();
+//var pkg = require("./package.json");
+var app = require("./app.js");
 
-const express = require('express'),
-  cors = require('cors'),
-  session = require('express-session'),
-  FileStore = require('session-file-store')(session),
-  passport = require('passport');
+require("greenlock-express")
+    .init({
+        // where to find .greenlockrc and set default paths
+        packageRoot: __dirname,
 
-const app = express();
+        // where config and certificate stuff go
+        configDir: "./greenlock.d",
 
-app.use(cors({
-  origin: process.env.CONTROL_ORIGIN,
-  allowedHeaders: 'X-Requested-With, Content-Type',
-  credentials: true
-}));
-app.use(express.urlencoded({ extended: false }));
-app.use(session({
-  store: new FileStore(),
-  secret: process.env.SECRET,
-  resave: true,
-  saveUninitialized: true,
-  cookie: {
-    path: '/',
-    sameSite: process.env.NODE_ENV !== 'development' ? 'none' : 'lax',
-    httpOnly: true,
-    secure: process.env.NODE_ENV !== 'development',
-    maxAge: 604800000
-  }
-}));
-app.use(passport.initialize());
-app.use(passport.session());
+        // contact for security and critical bug notices
+        maintainerEmail: process.env.MAINTAINER_EMAIL,
 
-const { authenticate, /*api*/ } = require('./routes');
+        // name & version for ACME client user agent
+        //packageAgent: pkg.name + "/" + pkg.version,
 
-app.use('/authenticate', authenticate);
-//app.use('/api', api);
-
-app.get('/logout', (req, res) => {
-  req.logout();
-  res.redirect('/');
-});
-
-app.get('/', (req, res) => {
-  res.sendStatus(200);
-});
-
-app.listen(process.env.PORT || 5000);
-
-module.exports = app;
+        // whether or not to run at cloudscale
+        cluster: false
+    })
+    .serve(app);

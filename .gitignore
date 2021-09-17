@@ -77,3 +77,16 @@ typings/
 
 # Express File Storage Sessions
 sessions
+
+# Private Certificates
+security
+
+# Content
+playlists
+thumbnails
+media
+playlists.json
+thumbnails.json
+
+# User Profiles
+profiles.json

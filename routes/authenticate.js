@@ -16,10 +16,7 @@ router.get('/callback', passport.authenticate('wolkeneis', {
 });
 
 router.get('/success', (req, res) => {
-  var options = {
-    controlOrigin: process.env.CONTROL_ORIGIN
-  };
-  res.sendStatus(200);
+  res.redirect(process.env.CONTROL_ORIGIN + '/redirect/nodes');
 });
 
 module.exports = router;
