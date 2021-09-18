@@ -1,8 +1,7 @@
 'use strict';
 
 const fs = require('fs'),
-  express = require('express'),
-  passport = require('passport');
+  express = require('express');
 
 const { content, database } = require('../content');
 

@@ -1,7 +1,6 @@
 'use strict';
 
 const express = require('express'),
-  passport = require('passport'),
   { ensureLoggedIn } = require('connect-ensure-login');
 
 const { database } = require('../content');
