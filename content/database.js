@@ -7,7 +7,7 @@ const database = new JsonDB(new Config("profiles.json", true, true, '/'));
 
 
 function patchProfile(profile) {
-  profile.scopes = process.env.DEFAULT_SCOPE ?? 'default';
+  profile.scopes = [process.env.DEFAULT_SCOPE ?? 'default'];
   database.push('/profiles/' + profile.id, profile, false);
 }
 
