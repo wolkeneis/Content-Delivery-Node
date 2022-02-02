@@ -10,6 +10,8 @@ const express = require('express'),
 
 const app = express();
 
+app.set('trust proxy', 1);
+
 const whitelist = [
   process.env.CONTROL_ORIGIN ?? 'https://eiswald.wolkeneis.dev',
   process.env.CONTROL_ORIGIN_ELECTRON ?? 'eiswald://-',
