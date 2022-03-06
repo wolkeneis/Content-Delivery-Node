@@ -20,8 +20,8 @@
   "homepage": "https://github.com/wolkeneis/Content-Delivery-Node#readme",
   "dependencies": {
     "cors": "^2.8.5",
-    "dotenv": "^15.0.1",
-    "express": "^4.17.1",
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
     "express-session": "^1.17.2",
     "greenlock-express": "v4",
     "node-json-db": "^1.4.0",
