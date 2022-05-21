@@ -15,7 +15,10 @@ router.get('/',
       res.json({
         username: user.username,
         avatar: user.avatar,
-        authorized: database.checkScope(user.uid, 'restricted')
+        authorized: database.checkScope(
+          user.uid,
+          process.env.REQUIRED_SCOPE ?? "restricted"
+        ),
       });
     } else {
       res.sendStatus(403);
