@@ -8,10 +8,10 @@ const database = new JsonDB(new Config("profiles.json", true, true, '/'));
 
 function patchProfile(profile) {
   profile['fetchedAt'] = profile['fetchedAt']?.toISOString();
-  if (!database.exists('/profiles/' + profile.id)) {
+  if (!database.exists('/profiles/' + profile.uid)) {
     profile.scopes = [process.env.DEFAULT_SCOPE ?? 'default'];
   }
-  database.push('/profiles/' + profile.id, profile, false);
+  database.push('/profiles/' + profile.uid, profile, false);
 }
 
 function fetchProfile(userId) {

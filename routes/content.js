@@ -11,7 +11,7 @@ router.use(checkDataAccess);
 
 router.get('/playlists',
   (req, res) => {
-    return res.json(content.playlists().filter(playlist => !playlist.scope || database.checkScope(req.user.id, playlist.scope)));
+    return res.json(content.playlists().filter(playlist => !playlist.scope || database.checkScope(req.user.uid, playlist.scope)));
   });
 
 router.get('/playlist/:playlist',
@@ -68,7 +68,7 @@ router.get('/source/:playlist/:episode',
     if (!source) {
       return res.sendStatus(404);
     }
-    console.log(`${req.user.username} (${req.user.id}) accessed ${source} at ${new Date()}`);
+    console.log(`${req.user.username} (${req.user.uid}) accessed ${source} at ${new Date()}`);
     return res.sendFile(source, {
       root: __dirname + '/../media'
     });
@@ -87,10 +87,10 @@ router.get('/thumbnail/:playlist',
 
 function checkDataAccess(req, res, next) {
   if (req.isAuthenticated()) {
-    if (database.checkScope(req.user.id, 'restricted')) {
+    if (database.checkScope(req.user.uid, 'restricted')) {
       return next();
     } else {
-      console.log(`${req.user.username} (${req.user.id}) is not whitelisted and tried to access ${req.originalUrl}`);
+      console.log(`${req.user.username} (${req.user.uid}) is not whitelisted and tried to access ${req.originalUrl}`);
       return res.sendStatus(403);
     }
   } else {
