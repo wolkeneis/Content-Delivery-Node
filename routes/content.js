@@ -87,7 +87,7 @@ router.get('/thumbnail/:playlist',
 
 function checkDataAccess(req, res, next) {
   if (req.isAuthenticated()) {
-    if (database.checkScope(req.user.uid, 'restricted')) {
+    if (database.checkScope(req.user.uid, process.env.REQUIRED_SCOPE ?? 'restricted')) {
       return next();
     } else {
       console.log(`${req.user.username} (${req.user.uid}) is not whitelisted and tried to access ${req.originalUrl}`);
